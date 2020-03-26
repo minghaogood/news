@@ -12,24 +12,53 @@
     </div>
 
     <!-- 表单 -->
-    <div class="form">
-      <div class="form-item">
-        <input type="text" placeholder="用户名 / 手机号码">
+    <van-form @submit="onSubmit" class="form">
+     <van-field
+       v-model="form.username"
+       name="手机号码"
+       placeholder="手机号码"
+       :rules="[{ required: true, message: '请填写手机号码' }]"
+     />
+      <van-field
+        v-model="form.password"
+        type="password"
+        name="密码"
+        placeholder="密码"
+        :rules="[{ required: true, message: '请填写密码' }]"
+      />
+      <div>
+        <van-button round block type="info" native-type="submit">
+          提交
+        </van-button>
       </div>
-      <div class="form-item">
-        <input type="password" placeholder="请输入密码">
-      </div>
-      <div class="form-item">
-        <button>登录</button>
-      </div>
-    </div>
+    </van-form>
   </div>
 
 </template>
 
 <script>
 export default {
-
+  data(){
+    return {
+      form:{
+        username:"",
+        password:""
+      }
+    }
+  },
+  methods:{
+    onSubmit(){
+      // this.$toast('登录成功')
+      this.$axios({
+        url: "http://127.0.0.1:3000/login",
+        method: "POST",
+        data: this.form
+      }).then(res =>{
+        // const {message} = res.data;
+        this.$toast.success(res.data);
+      })
+    }
+  }
 }
 </script>
  <style lang="less">
@@ -47,30 +76,20 @@ export default {
     font-size: 126 / 375 * 100vw;
     color: rgba(204, 51, 0, 1);
   }
-  .form-item{
-    margin-top: 20 / 375 * 100vw;
+  .form{
+    .van-cell{
+    padding: 10 /375 *100vw 0;
+    font-size: 16 /375 *100vw;
+    margin-bottom: 20 /375 *100vw;
   }
-  .form-item input {
-    width: 100%;
-    height: 44 / 375 * 100vw;
-    line-height: 44 / 375 * 100vw;
-    box-sizing: border-box;
-    background: none;
-    border: none;
-    border-bottom: 1px solid #999;
-    outline: none;
-    font-size: 16 / 375 * 100vw;
+  .van-cell:not(:last-child)::after{
+    border-bottom: 2px solid #999;
+    left: 0;
   }
-  .form-item button {
+  .van-button--info{
     margin-top: 50 / 375 * 100vw;
-    width: 100%;
-    height: 48 / 375 * 100vw;
-    line-height: 48 / 375 * 100vw;
-    outline: none;
-    background-color: rgba(204, 51, 0, 1);
-    color: white;
-    border-radius: 50 / 375 * 100vw;
-    border: none;
-    font-size: 16 / 375 * 100vw;
+    background-color: #cc3300;
+    border: 1px solid #cc3300;
+  }
   }
  </style>
