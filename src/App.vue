@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    
+    <router-view/>
   </div>
 </template>
 
@@ -26,4 +26,5 @@ ul, li, ol{
 i, em{
     font-style: normal;
 }
+@import url("//at.alicdn.com/t/font_1426139_jm7n2373nlh.css");
 </style>
