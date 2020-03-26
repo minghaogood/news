@@ -19,6 +19,12 @@
        placeholder="手机号码"
        :rules="[{ required: true, message: '请填写手机号码' }]"
      />
+     <van-field
+       v-model="form.nickname"
+       name="昵称"
+       placeholder="昵称"
+       :rules="[{ required: true, message: '请填写昵称' }]"
+     />
       <van-field
         v-model="form.password"
         type="password"
@@ -28,13 +34,13 @@
       />
       <div>
         <van-button round block type="info" native-type="submit">
-          提交
+          注册
         </van-button>
       </div>
     </van-form>
-    <router-link to="/register">
+    <router-link to="/login">
       <van-button round block class="register">
-          注册
+          登录
         </van-button>
       </router-link>
   </div>
@@ -47,6 +53,7 @@ export default {
     return {
       form:{
         username:"",
+        nickname:"",
         password:""
       }
     }
@@ -55,7 +62,7 @@ export default {
     onSubmit(){
       // this.$toast('登录成功')
       this.$axios({
-        url: "http://127.0.0.1:3000/login",
+        url: "http://127.0.0.1:3000/register",
         method: "POST",
         data: this.form
       }).then(res =>{
