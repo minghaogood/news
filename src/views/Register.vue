@@ -62,7 +62,7 @@ export default {
     onSubmit(){
       // this.$toast('登录成功')
       this.$axios({
-        url: "http://127.0.0.1:3000/register",
+        url: "/register",
         method: "POST",
         data: this.form
       }).then(res =>{
@@ -73,7 +73,7 @@ export default {
   }
 }
 </script>
- <style lang="less">
+ <style lang="less" scoped>
   .container{
     padding: 20 / 375 * 100vw;
   }
