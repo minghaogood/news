@@ -59,8 +59,10 @@ export default {
         method: "POST",
         data: this.form
       }).then(res =>{
-        // const {message} = res.data;
-        this.$toast.success(res.data);
+        const {message ,data} = res.data;
+        this.$toast.success(message);
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        this.$router.push("/personal");
       })
     }
   }
